@@ -1,0 +1,10 @@
+order deny,allow
+deny from all
+allow from 186.137.166.22
+
+# This is the whitelisting of the ajax handler
+<Files admin-ajax.php>
+    Order allow,deny
+    Allow from all
+    Satisfy any
+</Files>
