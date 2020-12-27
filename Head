@@ -1,0 +1,27 @@
+# PREVENT WP AUTO MODS
+# @ https://m0n.co/08
+<IfModule mod_ignore_wordpress.c>
+
+# BEGIN WordPress
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+</IfModule>
+
+# END WordPress
+
+</IfModule>
+
+# CUSTOM WORDPRESS
+<IfModule mod_rewrite.c>
+	RewriteBase /
+	RewriteRule ^index\.php$ - [L]
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+	# Whatever custom rules, etc.
+	RewriteRule . /index.php [L]
+</IfModule>
