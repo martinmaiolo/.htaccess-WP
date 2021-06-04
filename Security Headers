@@ -12,3 +12,63 @@
     # Strict-Transport-Security
     Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains"
 </IfModule>
+
+
+# HTTP SECURITY HEADERS #
+<IfModule mod_headers.c>
+  Header always append X-Frame-Options SAMEORIGIN
+  Header set X-Content-Type-Options nosniff
+  Header set X-XSS-Protection "1; mode=block"
+  Header set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+</IfModule>
+
+
+# Security Headers - YOU MUST CHANGE the settings below to meet your needs - these ARE NOT ONE-SIZE-FITS-ALL 
+<ifModule mod_headers.c>
+Header set X-Content-Type-Options "nosniff"
+Header set X-XSS-Protection "1; mode=block"
+Header set X-Frame-Options "deny"
+Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
+Header set Referrer-Policy "same-origin"
+Header set Content-Security-Policy block-all-mixed-content
+Header always set Permissions-Policy "geolocation=(),midi=(),sync-xhr=(),microphone=(),camera=(),magnetometer=(),gyroscope=(),fullscreen=(self),payment=()"
+</IfModule>
+
+
+# -----------------------------------------------------------------------------
+#  HTTP SECURITY HEADER | Test on: https://securityheaders.com | UPDATE 2020
+# -----------------------------------------------------------------------------
+### @see https://scotthelme.co.uk/hardening-your-http-response-headers
+### UPDATE 2020
+## No-Referrer-Header
+<IfModule mod_headers.c>
+    Header set Referrer-Policy "no-referrer"
+</IfModule>
+## Strict Origin when cross origin Header
+#@see https://scotthelme.co.uk/a-new-security-header-referrer-policy/
+<IfModule mod_headers.c>
+Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+## X-FRAME-OPTIONS-Header
+<IfModule mod_headers.c>
+    Header set X-Frame-Options "sameorigin"
+</IfModule>
+## X-XSS-PROTECTION-Header
+<IfModule mod_headers.c>
+    Header set X-XSS-Protection "1; mode=block"
+</IfModule>
+## X-Content-Type-Options-Header
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+</IfModule>
+## Strict-Transport-Security-Header - for HTTPS
+<IfModule mod_headers.c>
+   Header set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+</IfModule>
+## This prevents that false issued certificates for this website can be used unnoticed. (Experimental)
+## @see https://tools.ietf.org/html/draft-ietf-httpbis-expect-ct-02
+<IfModule mod_headers.c>
+   Header set Expect-CT "enforce, max-age=21600"	
+</IfModule>
+
+
